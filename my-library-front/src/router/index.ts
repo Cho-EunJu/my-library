@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { useUserStore } from '@/store/user'
+
 import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
 import MyPage from '../pages/MyPage.vue'
@@ -19,11 +21,25 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/order', component: Order },
     { path: '/search', component: Search },
     { path: '/sign-up', component: SignUp },
-]
+];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
-})
+});
+
+router.beforeEach((to, from, next) => {
+    const userStore = useUserStore();
+    const publicPath = ['/login', '/sign-up', '/'];
+    const authRequired = !publicPath.includes(to.path);
+
+    if(authRequired && !userStore.isLogin){
+        alert('로그인 후 이용 가능합니다.');
+        // console.log(authRequired, '//', to.path, '//', userStore.isLogin);
+        next('/login');
+    } else {
+        next();
+    }
+});
 
 export default router
