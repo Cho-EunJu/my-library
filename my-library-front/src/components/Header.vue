@@ -20,22 +20,22 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><router-link to="/" class="nav-link" active-class="active" aria-current="page">Home</router-link></li>
-        <li class="nav-item"><router-link to="/wish" class="nav-link" active-class="active">Wishlist</router-link></li>
-        <li class="nav-item"><router-link to="/hist" class="nav-link" active-class="active">History</router-link></li>
-        <li class="nav-item"><router-link to="/board" class="nav-link" active-class="active">Board</router-link></li>
-        <li class="nav-item"><router-link to="/search" class="nav-link" active-class="active">Search</router-link></li>
-        <li class="nav-item"><router-link to="/order" class="nav-link" active-class="active">Order</router-link></li>
+        <li class="nav-item"><router-link to="/" class="nav-link" active-class="active" aria-current="page">홈</router-link></li>
+        <li class="nav-item"><router-link to="/wish" class="nav-link" active-class="active">위시리스트</router-link></li>
+        <li class="nav-item"><router-link to="/hist" class="nav-link" active-class="active">히스토리</router-link></li>
+        <li class="nav-item"><router-link to="/board" class="nav-link" active-class="active">공유게시판</router-link></li>
+        <li class="nav-item"><router-link to="/search" class="nav-link" active-class="active">도서찾기</router-link></li>
+        <li class="nav-item"><router-link to="/order" class="nav-link" active-class="active">주문</router-link></li>
       </ul>
 
       <div class="col-md-3 text-end">
         <template v-if="!userStore.isLogin">
-          <router-link to="/login" class="btn btn-outline-primary me-2">Login</router-link>
-          <router-link to="/sign-up" class="btn btn-primary">Sign-up</router-link>
+          <router-link to="/login" class="btn btn-outline-primary me-2">로그인</router-link>
+          <router-link to="/sign-up" class="btn btn-primary">회원가입</router-link>
         </template>
         <template v-if="userStore.isLogin">
-          <button @click="userStore.logout()" class="btn btn-outline-primary me-2">Logout</button>
-          <router-link to="/my-page" class="btn btn-primary">MyPage</router-link>
+          <button @click="userStore.logout()" class="btn btn-outline-primary me-2">로그아웃</button>
+          <router-link to="/my-page" class="btn btn-primary">내정보</router-link>
         </template>
       </div>
     </header>
@@ -43,36 +43,10 @@
 </template>
 
 <style scoped>
-  .b-example-divider {
-    height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
-    border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-  }
-
-  .form-control-dark {
-    color: #fff;
-    background-color: var(--bs-dark);
-    border-color: var(--bs-gray);
-  }
-  .form-control-dark:focus {
-    color: #fff;
-    background-color: var(--bs-dark);
-    border-color: #fff;
-    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
-  }
 
   .bi {
     vertical-align: -.125em;
     fill: currentColor;
   }
 
-  .text-small {
-    font-size: 85%;
-  }
-
-  .dropdown-toggle {
-    outline: 0;
-  }
 </style>
