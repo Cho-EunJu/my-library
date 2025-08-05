@@ -1,0 +1,101 @@
+:root {
+    --primary-color: #25aa30;
+    --primary-text-color: #fff;
+}
+body {
+    font-family: 'Pretendard', sans-serif;
+}
+.site-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.site-title i {
+    color: #158a1d; /* 포인트 컬러 */
+    font-size: 2.2rem;
+}
+
+.site-title .highlight {
+    color: #158a1d; /* 강조 */
+}
+
+.header-title {
+    font-size: 1.5rem;        /* 헤더에 어울리는 크기 */
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.header-title i {
+    color: #158a1d;
+    font-size: 1.7rem;
+}
+
+.header-title .highlight {
+    color: #158a1d;
+}
+
+/* svg 로고 크기 */
+a > svg.bi {
+    width: 28px;
+    height: 22px;
+    margin-right: 8px;
+}
+
+.btn-primary {
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-primary:hover {
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.nav-link {
+    color: var(--primary-color);
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
+}
+
+.nav-gray-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.nav-gray-list .nav-link {
+    color: gray;
+}
+
+.nav-gray-list .nav-link.active {
+    color: white;
+    background-color: gray;
+}
+.nav-gray-list .nav-link:hover {
+    color: blue;
+}
+.nav-gray-list .nav-link.active:hover {
+    color: white;
+    background-color: gray;
+}
