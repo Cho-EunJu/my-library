@@ -40,5 +40,5 @@
 
 <배포 방식><br>
 1. AWS EC2 서버 사용<br>
-2. 학습용이기 때문에 서버 1대에 DB(Mysql 8.x) + WAS (WEB서버는 나중에) + Jenkins 자동 배포 적용
+2. 학습용이기 때문에 서버 1대에 DB(Mysql 8.x) + WAS (WEB 서버는 나중에) + Jenkins 자동 배포 적용
 		
