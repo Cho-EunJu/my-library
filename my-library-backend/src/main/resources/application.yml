@@ -1,7 +1,7 @@
 spring:
   datasource:
-    username: ENC(GzoKiF5s6bYyG/0fCs6zpaKENwRyvCjg)
-    password: ENC(VcSu9hzNHpuPgzkhmH+qkQ==)
+    username: ENC(wOSSeLozF5y20roVn6HL6wdOsuZ+2Hnt)
+    password: ENC(XkxtHQp7dawTFYVIVp4Zmg==)
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
