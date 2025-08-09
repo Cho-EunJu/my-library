@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: ENC(GzoKiF5s6bYyG/0fCs6zpaKENwRyvCjg)
+    password: ENC(VcSu9hzNHpuPgzkhmH+qkQ==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  jackson:
+    time-zone: Asia/Seoul
