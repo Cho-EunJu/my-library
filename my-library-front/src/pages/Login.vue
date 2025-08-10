@@ -1,5 +1,16 @@
 <script setup lang="ts">
+  import { ref } from 'vue'
+  import apiClient from "@/api/axiosInstance";
 
+  const message = ref('');
+
+  async function onLogin(event : Event){
+    event.preventDefault() // 폼 제출 기본동작 막기
+
+    const res = await apiClient.get('/hello/say');
+    message.value = res.data.message;
+    alert("api 호출 성공: " + message.value);
+  }
 </script>
 
 <style scoped src="@/assets/css/login.css"></style>
@@ -20,7 +31,7 @@
           <label for="floatingPassword">비밀번호</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary mt-3 mb-4" type="submit">로그인</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3 mb-4" type="button" @click="onLogin" >로그인</button>
 
         <ul class="nav nav-pills nav-gray-list">
           <li class="nav-gray-item"><router-link to="/" class="nav-link" active-class="active" aria-current="page">비밀번호 찾기</router-link></li>

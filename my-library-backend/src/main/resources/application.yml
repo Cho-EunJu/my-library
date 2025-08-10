@@ -13,3 +13,6 @@ spring:
 
   jackson:
     time-zone: Asia/Seoul
+
+cors:
+  allowed-origins: "http://localhost:5173,http://13.239.186.180"
