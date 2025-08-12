@@ -14,7 +14,7 @@
 
   <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <a href="/public" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
         <h3 class="header-title">
           <i class="bi bi-book-half"></i>
@@ -23,7 +23,7 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><router-link to="/" class="nav-link" active-class="active" aria-current="page">홈</router-link></li>
+        <li class="nav-item"><router-link to="/public" class="nav-link" active-class="active" aria-current="page">홈</router-link></li>
         <li class="nav-item"><router-link to="/wish" class="nav-link" active-class="active">위시리스트</router-link></li>
         <li class="nav-item"><router-link to="/hist" class="nav-link" active-class="active">히스토리</router-link></li>
         <li class="nav-item"><router-link to="/board" class="nav-link" active-class="active">공유게시판</router-link></li>

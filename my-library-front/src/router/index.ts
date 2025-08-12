@@ -2,14 +2,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { useUserStore } from '@/store/user'
 
 import Home from '../pages/Home.vue'
-import Login from '../pages/Login.vue'
-import MyPage from '../pages/MyPage.vue'
-import Wishlist from '../pages/Wishlist.vue'
-import History from '../pages/History.vue'
-import Board from '../pages/Board.vue'
-import Order from '../pages/Order.vue'
-import Search from '../pages/Search.vue'
-import SignUp from '../pages/SignUp.vue'
+import Login from '../pages/auth/Login.vue'
+import MyPage from '../pages/auth/MyPage.vue'
+import Wishlist from '../pages/book/Wishlist.vue'
+import History from '../pages/book/History.vue'
+import Board from '../pages/board/BoardList.vue'
+import Order from '../pages/order/Order.vue'
+import Search from '../pages/book/Search.vue'
+import SignUp from '../pages/auth/SignUp.vue'
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/', component: Home },

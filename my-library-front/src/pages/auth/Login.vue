@@ -34,7 +34,7 @@
         <button class="w-100 btn btn-lg btn-primary mt-3 mb-4" type="button" @click="onLogin" >로그인</button>
 
         <ul class="nav nav-pills nav-gray-list">
-          <li class="nav-gray-item"><router-link to="/" class="nav-link" active-class="active" aria-current="page">비밀번호 찾기</router-link></li>
+          <li class="nav-gray-item"><router-link to="/public" class="nav-link" active-class="active" aria-current="page">비밀번호 찾기</router-link></li>
           <li class="nav-gray-item"><router-link to="/wish" class="nav-link" active-class="active">회원가입</router-link></li>
           <li class="nav-gray-item"><router-link to="/hist" class="nav-link" active-class="active">아이디찾기</router-link></li>
         </ul>
