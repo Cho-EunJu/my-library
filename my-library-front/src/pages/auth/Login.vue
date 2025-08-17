@@ -11,6 +11,22 @@
     message.value = res.data.message;
     alert("api 호출 성공: " + message.value);
   }
+
+  const loginWithGoogle = async () => {
+    try {
+      // Spring Boot API 호출 → 구글 인증 URL 받기
+      const res = await apiClient.post('/auth/oauth2/google');
+      const redirectUrl = res.data.redirectUrl;
+
+      console.log("Ellen:: ", redirectUrl);
+      // 구글 로그인 페이지로 이동
+      window.location.href = redirectUrl;
+    } catch (e) {
+      console.error('구글 로그인 요청 실패', e);
+    }
+  }
+
+
 </script>
 
 <style scoped src="@/assets/css/login.css"></style>
@@ -23,8 +39,8 @@
         </h1>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="ID">
-          <label for="floatingInput">아이디</label>
+          <input type="text" class="form-control" id="floatingInput" placeholder="ID 또는 Email">
+          <label for="floatingInput">아이디/이메일</label>
         </div>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -34,7 +50,7 @@
         <button class="w-100 btn btn-lg btn-primary mt-3 mb-4" type="button" @click="onLogin" >로그인</button>
 
         <ul class="nav nav-pills nav-gray-list">
-          <li class="nav-gray-item"><router-link to="/public" class="nav-link" active-class="active" aria-current="page">비밀번호 찾기</router-link></li>
+          <li class="nav-gray-item"><router-link to="/" class="nav-link" active-class="active" aria-current="page">비밀번호 찾기</router-link></li>
           <li class="nav-gray-item"><router-link to="/wish" class="nav-link" active-class="active">회원가입</router-link></li>
           <li class="nav-gray-item"><router-link to="/hist" class="nav-link" active-class="active">아이디찾기</router-link></li>
         </ul>
@@ -44,9 +60,9 @@
             <span>간편 로그인</span>
           </div>
           <div class="social-login-buttons">
-            <button class="social-btn kakao" aria-label="카카오 로그인" title="카카오"></button>
-            <button class="social-btn naver" aria-label="네이버 로그인" title="네이버"></button>
-            <button class="social-btn google" aria-label="구글 로그인" title="구글"></button>
+            <button class="social-btn kakao" aria-label="카카오 로그인" title="카카오" type="button"></button>
+            <button class="social-btn naver" aria-label="네이버 로그인" title="네이버" type="button"></button>
+            <button class="social-btn google" aria-label="구글 로그인" title="구글" type="button" @click="loginWithGoogle"></button>
           </div>
         </div>
       </form>
