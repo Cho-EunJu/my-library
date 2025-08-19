@@ -10,9 +10,5 @@ import java.time.LocalDateTime;
 public class LoginResponseDto {
     private String jwt;
     private Long userId;
-    private String email;
-    private String userName;
-    private String nickName;
-    private boolean needProfile;
-    private LocalDateTime lastLoginAt;
+    private LoginUserDto user;
 }

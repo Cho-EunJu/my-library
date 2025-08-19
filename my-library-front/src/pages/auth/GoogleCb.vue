@@ -22,11 +22,12 @@
 
     try {
       // Spring Boot에 code 전달 → JWT + 유저정보 받기
-      const res = await apiClient.post('/auth/google', {
+      const res = await apiClient.post('/auth/oauth2/cb/google', {
         code : code
       });
 
       const { jwt, user } = res.data;
+      // console.log("Ellen:: => ", res.data);
 
       // JWT를 localStorage에 저장
       localStorage.setItem('jwt', jwt);

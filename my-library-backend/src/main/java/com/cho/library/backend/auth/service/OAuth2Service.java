@@ -1,6 +1,7 @@
 package com.cho.library.backend.auth.service;
 
 import com.cho.library.backend.auth.dto.LoginResponseDto;
+import com.cho.library.backend.auth.dto.LoginUserDto;
 import com.cho.library.backend.auth.model.Provider;
 import com.cho.library.backend.auth.util.JwtUtil;
 import com.cho.library.backend.user.entity.UserEntity;
@@ -75,16 +76,18 @@ public class OAuth2Service{
         boolean needProfile = (user.getUserName() == null || user.getUserName().isBlank())
                 || (user.getNickName() == null || user.getNickName().isBlank());
 
-        return LoginResponseDto.builder()
-                .jwt(jwt)
-                .userId(user.getId())
-                .email(user.getEmail())
+        LoginUserDto userDto = LoginUserDto.builder()
                 .userName(user.getUserName())
                 .nickName(user.getNickName())
-                .needProfile(needProfile)
+                .email(user.getEmail())
                 .lastLoginAt(user.getLastLoginAt())
+                .needProfile(needProfile)
                 .build();
 
+        return LoginResponseDto.builder()
+                .jwt(jwt)
+                .user(userDto)
+                .build();
     }
 
     private ClientRegistration getRegistrationOrThrow(String provider) {
@@ -147,7 +150,7 @@ public class OAuth2Service{
 
     private String extractProviderId(Provider provider, Map<String, Object> attributes) {
         return switch (provider) {
-            case GOOGLE -> (String) attributes.get("id"); // 구글 v2 userinfo에는 "id" 또는 "sub" 케이스. 둘 다 확인 필요
+            case GOOGLE -> (String) attributes.get("sub");
             case NAVER -> {
                 Map<String, Object> res = (Map<String, Object>) attributes.get("response");
                 yield res != null ? (String) res.get("id") : null;

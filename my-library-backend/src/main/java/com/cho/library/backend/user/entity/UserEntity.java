@@ -8,7 +8,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 /*
-* 운영 환경에서는 DBA가 직접 인덱스, key 관리 → @Table 최소한의 설정만 유지
+* 운영 환경에서는 DBA가 직접 인덱스, key 관리 → @Table 최소한의 설정(또는 테이블명 정도) 유지
 * */
 @Entity
 @Table(
@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class UserEntity extends BaseTimeEntity {
 
     @Id
