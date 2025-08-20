@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                     // 1) 로그인/리다이렉트 준비/콜백 등 인증 없이 허용
                     .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/hello/**").permitAll()   //test 경로
                     // 2) 정적 리소스, 루트 등 (필요 시 추가)
                     .requestMatchers("/", "/error").permitAll()
                     // 3) 그 외는 인증 필요
