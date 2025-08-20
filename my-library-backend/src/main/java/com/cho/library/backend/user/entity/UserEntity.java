@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 @Table(
         name = "user",
         uniqueConstraints = {
-                @UniqueConstraint(name = "uk_user_username", columnNames = {"user_name"}),             // 아이디는 유니크
-                @UniqueConstraint(name = "uk_user_email_provider", columnNames = {"email", "provider"}) // (email, provider) 조합 유니크
+                @UniqueConstraint(name = "uk_user_email", columnNames = {"email"}) // (email, provider) 조합 유니크
         },
         indexes = {
                 @Index(name = "idx_user_email", columnList = "email"),
@@ -34,12 +33,8 @@ public class UserEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** 아이디(로그인ID) — 일반/소셜 모두 이 필드 사용, 소셜 첫 가입 시 null 가능 */
-    @Column(length = 50, name = "user_name", unique = true)
-    private String userName;
-
-    /** 이메일 (LOCAL의 경우 null 가능, 소셜은 웬만하면 존재) */
-    @Column(length = 200, nullable = false)
+    /** 이메일 (로그인 시 사용) */
+    @Column(length = 200, nullable = false, unique = true)
     private String email;
 
     /** 로그인 제공자 */

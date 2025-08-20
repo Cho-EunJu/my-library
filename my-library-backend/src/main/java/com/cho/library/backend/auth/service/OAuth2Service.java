@@ -73,11 +73,9 @@ public class OAuth2Service{
         // 7) JWT 발급
         String jwt = jwtUtil.createToken(user.getId(), user.getEmail(), user.getRole());
 
-        boolean needProfile = (user.getUserName() == null || user.getUserName().isBlank())
-                || (user.getNickName() == null || user.getNickName().isBlank());
+        boolean needProfile = (user.getNickName() == null || user.getNickName().isBlank());
 
         LoginUserDto userDto = LoginUserDto.builder()
-                .userName(user.getUserName())
                 .nickName(user.getNickName())
                 .email(user.getEmail())
                 .lastLoginAt(user.getLastLoginAt())
@@ -97,7 +95,7 @@ public class OAuth2Service{
     }
 
     private Map<String, Object> exchangeCodeForToken(ClientRegistration reg, String code, String redirectUri) {
-        // Spring 6+ RestClient 사용 (RestTemplate보다 최신)
+        // Spring 6+ RestClient 사용 (RestTemplate 보다 최신)
         RestClient client = RestClient.create();
 
         MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
@@ -107,7 +105,7 @@ public class OAuth2Service{
         form.add("redirect_uri", redirectUri);
         form.add("grant_type", "authorization_code");
 
-        // 토큰 엔드포인트 (registration에 정의됨)
+        // 토큰 엔드포인트 (registration 에 정의됨)
         String tokenUri = reg.getProviderDetails().getTokenUri();
 
         return client.post()
@@ -133,7 +131,7 @@ public class OAuth2Service{
     }
 
     private String extractEmail(Provider provider, Map<String, Object> attributes) {
-        // provider별 JSON 구조가 다르므로 분기
+        // provider 별로 JSON 구조가 다르므로 분기
         return switch (provider) {
             case GOOGLE -> (String) attributes.get("email");
             case NAVER -> {
@@ -174,7 +172,6 @@ public class OAuth2Service{
 
         UserEntity user = UserEntity.builder()
                 .email(email)
-                .userName(null)
                 .nickName(null)
                 .provider(provider)
                 .providerId(providerId)
