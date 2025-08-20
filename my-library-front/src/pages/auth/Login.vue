@@ -39,8 +39,8 @@
         </h1>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="ID 또는 Email">
-          <label for="floatingInput">아이디/이메일</label>
+          <input type="text" class="form-control" id="floatingInput" placeholder="Email">
+          <label for="floatingInput">이메일</label>
         </div>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
