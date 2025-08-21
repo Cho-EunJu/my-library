@@ -8,9 +8,10 @@ server:
 app:
   front-base-url: http://13.239.186.180:80
 
-logging:
-  file:
-    name: /var/log/my-library/springboot.log
-  level:
-    root: info
-    org.hibernate.sql: DEBUG
+#logging:
+#  file:
+#    name: /var/log/my-library/springboot.log
+#  level:
+#    root: info
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql: TRACE   # 바인딩 값까지 보고 싶다면 추가
