@@ -10,7 +10,7 @@ app:
 
 logging:
   file:
-    name: /var/log/myapp/springboot.log
+    name: /var/log/my-library/springboot.log
   level:
     root: info
     org.hibernate.sql: DEBUG
