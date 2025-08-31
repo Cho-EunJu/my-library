@@ -12,17 +12,17 @@
     alert("api 호출 성공: " + message.value);
   }
 
-  const loginWithGoogle = async () => {
+  const loginWithSocial = async (key) => {
     try {
       // Spring Boot API 호출 → 구글 인증 URL 받기
-      const res = await apiClient.post('/auth/oauth2/google');
+      const res = await apiClient.post('/auth/oauth2/'+key);
       const redirectUrl = res.data.redirectUrl;
 
       console.log("Ellen:: ", redirectUrl);
-      // 구글 로그인 페이지로 이동
+      // 로그인 페이지로 이동
       window.location.href = redirectUrl;
     } catch (e) {
-      console.error('구글 로그인 요청 실패', e);
+      console.error('로그인 요청 실패', e);
     }
   }
 
@@ -60,9 +60,9 @@
             <span>간편 로그인</span>
           </div>
           <div class="social-login-buttons">
-            <button class="social-btn kakao" aria-label="카카오 로그인" title="카카오" type="button"></button>
-            <button class="social-btn naver" aria-label="네이버 로그인" title="네이버" type="button"></button>
-            <button class="social-btn google" aria-label="구글 로그인" title="구글" type="button" @click="loginWithGoogle"></button>
+            <button class="social-btn kakao" aria-label="카카오 로그인" title="카카오" type="button" @click="loginWithSocial('kakao')"></button>
+            <button class="social-btn naver" aria-label="네이버 로그인" title="네이버" type="button" @click="loginWithSocial('naver')"></button>
+            <button class="social-btn google" aria-label="구글 로그인" title="구글" type="button" @click="loginWithSocial('google')"></button>
           </div>
         </div>
       </form>

@@ -21,7 +21,9 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/order', component: Order },
     { path: '/search', component: Search },
     { path: '/sign-up', component: SignUp },
-    { path: '/oauth2/cb/google', component: () => import('../pages/auth/GoogleCb.vue')}
+    { path: '/oauth2/cb/google', component: () => import('../pages/auth/callback/GoogleCb.vue')},
+    { path: '/oauth2/cb/naver', component: () => import('../pages/auth/callback/NaverCb.vue')},
+    { path: '/oauth2/cb/kakao', component: () => import('../pages/auth/callback/KakaoCb.vue')}
 ];
 
 const router = createRouter({
@@ -31,7 +33,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const userStore = useUserStore();
-    const publicPath = ['/login', '/sign-up', '/', '/oauth2/cb/google'];
+    const publicPath = ['/login', '/sign-up', '/', '/oauth2/cb/google', '/oauth2/cb/naver', '/oauth2/cb/kakao'];
     const authRequired = !publicPath.includes(to.path);
 
     if(authRequired && !userStore.isLogin){
