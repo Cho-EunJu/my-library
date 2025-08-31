@@ -51,5 +51,5 @@ out/
 Thumbs.db
 
 ### 환경 파일 (보안) ###
-/src/test/java/encrypt/JasyptTest.java
+**/test/java/encrypt/JasyptTest.java
 # src/main/resources/application-*.yml
