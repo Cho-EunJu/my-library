@@ -37,6 +37,9 @@ public class UserEntity extends BaseTimeEntity {
     @Column(length = 200, nullable = false, unique = true)
     private String email;
 
+    @Column(length = 100)
+    private String password;
+
     /** 로그인 제공자 */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)

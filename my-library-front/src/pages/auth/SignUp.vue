@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import apiClient from "@/api/axiosInstance";
 
 const email = ref('');
 const password = ref('');
@@ -63,7 +64,13 @@ const onRegister = () => {
     return;
   }
 
-  alert("회원가입?!");
+  fnSignUp();
+}
+
+const fnSignUp = () =>{
+  const res = apiClient.post('/auth/oauth2/cb/google', {
+    code : code
+  });
 }
 </script>
 
@@ -202,11 +209,4 @@ const onRegister = () => {
     font-size: 0.875rem;
   }
 
-  .color-pass {
-    color: rgb(0, 196, 113);
-  }
-
-  .color-miss {
-    color: crimson;
-  }
 </style>
