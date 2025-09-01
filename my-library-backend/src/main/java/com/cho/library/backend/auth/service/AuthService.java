@@ -25,7 +25,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class OAuth2Service{
+public class AuthService {
 
     @Value("${app.front-base-url}")
     private String frontBaseUrl;

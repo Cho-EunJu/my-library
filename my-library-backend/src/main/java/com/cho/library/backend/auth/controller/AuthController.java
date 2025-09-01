@@ -2,7 +2,7 @@ package com.cho.library.backend.auth.controller;
 
 import com.cho.library.backend.auth.dto.LoginRequestDto;
 import com.cho.library.backend.auth.dto.LoginResponseDto;
-import com.cho.library.backend.auth.service.OAuth2Service;
+import com.cho.library.backend.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final OAuth2Service oAuth2Service;
+    private final AuthService authService;
     private final ClientRegistrationRepository clientRegistrationRepository;
 
     @Value("${app.front-base-url}")
@@ -49,6 +49,6 @@ public class AuthController {
     /** 2) 프론트 콜백에서 code 받아 토큰 교환 & 로그인 처리 (google/naver/kakao 공통) */
     @PostMapping("/oauth2/cb/{provider}")
     public LoginResponseDto googleCallback(@PathVariable String provider, @RequestBody LoginRequestDto reqDto) {
-        return oAuth2Service.processLogin(provider, reqDto.getCode());
+        return authService.processLogin(provider, reqDto.getCode());
     }
 }
