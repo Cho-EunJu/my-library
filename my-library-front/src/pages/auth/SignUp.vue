@@ -15,6 +15,8 @@ const passwordConfirmTouched = ref(false);
 const showPassword = ref(false);
 const showPasswordConfirm = ref(false);
 
+const existEmail = ref(false);
+
 const togglePassword = (field) => {
   if (field === "password") {
     showPassword.value = !showPassword.value;
@@ -67,6 +69,15 @@ const onRegister = () => {
   fnSignUp();
 }
 
+const checkEmail = async (email) => {
+  if(!isEmailValid.value) return;
+  const res = await apiClient.post('/auth/dup-email', {
+    email : email
+  });
+  console.log(res.data);
+  existEmail.value = "exist" === res.data;
+}
+
 const fnSignUp = () =>{
   const res = apiClient.post('/auth/oauth2/cb/google', {
     code : code
@@ -93,12 +104,16 @@ const fnSignUp = () =>{
             placeholder="Email"
             v-model="email"
             @focus="emailTouched = true"
-            @input="emailTouched = true"
+            @focusout="checkEmail($event.target.value);"
+            @input="emailTouched = true; existEmail = false;"
         />
         <label for="registerEmail">이메일</label>
       </div>
       <div v-if="emailTouched && !isEmailValid" class="text-danger text-start small mb-3">
         <i class="bi bi-x-lg"></i> 유효하지 않은 이메일 입니다.
+      </div>
+      <div v-if="existEmail && isEmailValid && emailTouched" class="text-danger text-start small mb-3">
+        <i class="bi bi-x-lg"></i> 중복된 이메일 입니다.
       </div>
 
       <!-- 비밀번호 -->
@@ -121,14 +136,14 @@ const fnSignUp = () =>{
       </div>
       <!-- 비밀번호 규칙 -->
       <div class="form-floating mt-2">
-        <div class="pw-info-box" :class="passwordTouched ? (validPwRule1 ? 'color-pass' : 'color-miss') : ''">
+        <div class="pw-info-box" :class="passwordTouched ? (validPwRule1 ? 'text-primary' : 'text-danger') : ''">
           <!-- 아이콘 -->
           <i v-if="!passwordTouched" class="bi bi-check-lg" style="color: #bcb8b8;"></i> <!-- 기본 회색 -->
           <i v-else-if="validPwRule1" class="bi bi-check-lg"></i>
           <i v-else class="bi bi-x-lg"></i>
           <p>영문/숫자/특수문자 중 2가지 이상 포함</p>
         </div>
-        <div class="pw-info-box" :class="passwordTouched ? (validPwRule2 ? 'color-pass' : 'color-miss') : ''">
+        <div class="pw-info-box" :class="passwordTouched ? (validPwRule2 ? 'text-primary' : 'text-danger') : ''">
           <!-- 아이콘 -->
           <i v-if="!passwordTouched" class="bi bi-check-lg" style="color: #bcb8b8;"></i> <!-- 기본 회색 -->
           <i v-else-if="validPwRule2" class="bi bi-check-lg"></i>
@@ -208,5 +223,6 @@ const fnSignUp = () =>{
     gap: 5px;
     font-size: 0.875rem;
   }
+
 
 </style>
