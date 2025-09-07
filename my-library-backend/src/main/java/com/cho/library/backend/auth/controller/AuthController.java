@@ -56,7 +56,7 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     public LoginResponseDto signUp(@RequestBody SignUpRequestDto reqDto) {
-        return null;
+        return authService.signUp(reqDto);
     }
 
     @PostMapping("/dup-email")

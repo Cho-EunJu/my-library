@@ -46,7 +46,7 @@ public class UserEntity extends BaseTimeEntity {
     private Provider provider;
 
     /** 제공자 내부 식별자 (구글의 sub, 카카오 id 등) */
-    @Column(length = 100, name = "provider_id", nullable = false)
+    @Column(length = 100, name = "provider_id")
     private String providerId;
 
     /** 닉네임 — 소셜 첫 가입 시 null 가능, 이후 프로필 단계에서 수집 */

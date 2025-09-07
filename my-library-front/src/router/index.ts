@@ -10,6 +10,7 @@ import Board from '../pages/board/BoardList.vue'
 import Order from '../pages/order/Order.vue'
 import Search from '../pages/book/Search.vue'
 import SignUp from '../pages/auth/SignUp.vue'
+import WriteProfile from "@/pages/auth/WriteProfile.vue";
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/', component: Home },
@@ -21,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     { path: '/order', component: Order },
     { path: '/search', component: Search },
     { path: '/sign-up', component: SignUp },
+    { path: '/write-profile', component: WriteProfile },
     { path: '/oauth2/cb/google', component: () => import('../pages/auth/callback/GoogleCb.vue')},
     { path: '/oauth2/cb/naver', component: () => import('../pages/auth/callback/NaverCb.vue')},
     { path: '/oauth2/cb/kakao', component: () => import('../pages/auth/callback/KakaoCb.vue')}

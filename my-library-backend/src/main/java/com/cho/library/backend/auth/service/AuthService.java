@@ -2,6 +2,7 @@ package com.cho.library.backend.auth.service;
 
 import com.cho.library.backend.auth.dto.LoginResponseDto;
 import com.cho.library.backend.auth.dto.LoginUserDto;
+import com.cho.library.backend.auth.dto.SignUpRequestDto;
 import com.cho.library.backend.auth.model.Provider;
 import com.cho.library.backend.auth.util.JwtUtil;
 import com.cho.library.backend.user.entity.UserEntity;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class AuthService {
     private final ClientRegistrationRepository clientRegistrationRepository;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 공통 처리:
@@ -188,5 +191,36 @@ public class AuthService {
     public ResponseEntity<String> duplicationCheckForEmail(String email) {
         Optional<UserEntity> user = userRepository.findByEmail(email);
         return user.isPresent() ? ResponseEntity.ok().body("exist") : ResponseEntity.ok().body("notExist");
+    }
+
+    public LoginResponseDto signUp(SignUpRequestDto reqDto) {
+        UserEntity user = UserEntity.builder()
+                .email(reqDto.getEmail())
+                .nickName(null)
+                .provider(Provider.valueOf(reqDto.getProvider().toUpperCase()))
+                .role("ROLE_USER")
+                .point(0)
+                .level(1)
+                .lastLoginAt(LocalDateTime.now())
+                .password(passwordEncoder.encode(reqDto.getPassword()))
+                .build();
+
+        UserEntity savedUser = userRepository.save(user);
+        String jwt = jwtUtil.createToken(savedUser.getId(), savedUser.getEmail(), savedUser.getRole());
+
+        boolean needProfile = (savedUser.getNickName() == null || savedUser.getNickName().isBlank());
+
+        LoginUserDto userDto = LoginUserDto.builder()
+                .nickName(savedUser.getNickName())
+                .email(savedUser.getEmail())
+                .lastLoginAt(savedUser.getLastLoginAt())
+                .needProfile(needProfile)
+                .build();
+
+        return LoginResponseDto.builder()
+                .jwt(jwt)
+                .user(userDto)
+                .build();
+
     }
 }

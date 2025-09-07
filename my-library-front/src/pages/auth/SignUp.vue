@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import apiClient from "@/api/axiosInstance";
+import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '@/store/user'
+
+
+const router = useRouter();
+const userStore = useUserStore();
 
 const email = ref('');
 const password = ref('');
@@ -66,6 +72,10 @@ const onRegister = () => {
     return;
   }
 
+  if(existEmail.value){
+    document.getElementById('registerEmail').focus();
+    return;
+  }
   fnSignUp();
 }
 
@@ -78,10 +88,27 @@ const checkEmail = async (email) => {
   existEmail.value = "exist" === res.data;
 }
 
-const fnSignUp = () =>{
-  const res = apiClient.post('/auth/oauth2/cb/google', {
-    code : code
+const fnSignUp = async () =>{
+  const res = await apiClient.post('/auth/sign-up', {
+    email : document.getElementById('registerEmail').value,
+    password : document.getElementById('registerPassword').value,
+    provider : 'LOCAL'
   });
+
+  const { jwt, user } = res.data;
+
+  // JWT를 localStorage에 저장
+  localStorage.setItem('jwt', jwt);
+
+  // Pinia store 갱신
+  userStore.login(user.email);
+
+  if(user.needProfile){
+    router.push('/write-profile');
+  } else {
+    router.push('/')
+  }
+
 }
 </script>
 
